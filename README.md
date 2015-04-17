@@ -1,2 +1,2 @@
 # datasciencecoursera
-Created to satisfy project for Data Scientist's Toolbox Course
+Created to satisfy The Data Scientist's Toolbox course project
