@@ -21,5 +21,4 @@ second <- function(x) {
 #Load/read .R code from a file or connetion 
 #source("Coursera_R.R") #Really for R not RStudio
 
-Testing
-123
+Push Pull Practice
