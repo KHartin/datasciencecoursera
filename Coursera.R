@@ -199,3 +199,44 @@ x <- matrix (1:4,2,2); y <- matrix(rep(10,4),2,2)
 x * y #Element-wise multiplication
 x / y
 x %*% y #True matrix multiplication
+
+#For quiz 1 
+x <- 4
+class(x)
+x <- c(4, "a", TRUE)
+class(x)
+x <- c(1,3,5); y <- c(3,2,10)
+rbind(x,y)
+x <- list(2, "a", "b", TRUE)
+x[[1]]
+class(x[[1]])
+x <- 1:4; y <- 2:3
+x + y
+class(x + y)
+x <- c(17, 14, 4, 5, 13, 12, 10)
+x[x >= 11] <- 4 #Changed each element that is greater than 10 to a 4
+
+x <- read.csv("hw1_data.csv") #Create data,frame from given .csv
+colnames(x) #Column names of data.frame
+x[1:2,] # First 2 rows of data.frame
+nrow(x) #Number of observations / rows
+x[152:153,] #Extract last 2 rows
+x[47,1] #Value of ozone in 47th row
+bad <- is.na(x[,1]) #Logical identifying all NAs
+sum(bad) #Count of the number of NAs
+mean(x[!bad,][,1]) #Mean of the Ozone column exclusing and row with an NA in the ozone column
+x[, c(1,4)] #Subset of only Ozone and Temp columns
+good <- complete.cases(x[,c(1,4)])
+x[good,c(1,4)][x$"Ozone" > 31,][x$"Temp" > 90,]
+
+removeNA <- subset(x, !is.na(x$"Ozone" & x$"Temp"))
+highOzTem <- subset(removeNA, removeNA$"Ozone" > 31 & 
+                      removeNA$"Temp" > 90)
+highOzTem[1:10,]
+mean(highOzTem[,2])
+
+removeNA <- subset(x, !is.na(x$"Temp"))
+mon6 <- subset(removeNA, removeNA$Month == 6)
+mean(mon6[,4])
+mon5 <- subset(x, x$Month == 5)
+max(mon5[,1], na.rm = TRUE)
