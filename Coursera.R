@@ -74,3 +74,128 @@ x <- c(1,2,NA,10,3,NaN)
 is.na(x)
 is.nan(x)
 
+##Pracrtice from Data Frames R Lecture
+x <- data.frame(foo = 1:4, bar = c(T,T,F,F))
+nrow(x)
+ncol(x)
+
+##Pracrtice from Names Atributes R Lecture
+x <- 1:3
+names(x)
+names(x) <- c("foo", "bar", "norf")
+names(x)
+
+x <- list(a = 1, b = 2, c = 3)
+x
+
+m <- matrix(1:4, nrow = 2, ncol = 2)
+dimnames(m) <- list(c("a", "b"), c("c", "d"))
+m
+
+##Practice from Reading Tabular Data R Lecture
+data <- read.table("practice.txt", head = T, sep = ",")
+data1 <- read.csv("practice.txt")
+
+##Practice from Reading Large Tables R Lecture
+?read.table
+initial <- read.table("practice.txt", nrows = 3, head = T, sep = ",")
+classes <- sapply(initial,class)
+tabALL <- read.table("practice.txt", nrows = 3, head = T, sep = ",", colClasses = classes)
+
+
+##Practice from Textual Data Formats R Lecture
+y <- data.frame(a = 1, b = "a")
+dput(y)
+dput(y, file = "y.R")
+new.y <- dget("y.R")
+new.y
+
+x <- "foo"
+y <- data.frame(a = 1, b = "a")
+dump(c("x","y"), file = "data.R")
+rm(x,y) #Removed x and y
+source("data.R") 
+
+####Practice from Interfaces to the Outside World R Lecture
+str(file)
+con <- file("practice.txt", "r")
+data <- read.csv(con)
+close(con)
+
+con <- url("http://www.jhsph.edu", "r")
+x <- readLines(con)
+head(x)
+
+##Practice from Subsetting Basics R Lecture
+x <- c("a", "b", "c", "c", "d", "a")
+x[1]
+x[1:4]
+x[x >"a"]
+u <- x > "a"
+u
+x[u]
+
+##Practice from Subsetting Lists R Lecture
+x <- list(foo = 1:4, bar = 0.6)
+x[1]#Return a list
+x[2]
+x[[1]]#Returns elements of the list
+x$bar
+x[["bar"]]#Same as above
+x["bar"]#Single bracket always return a list
+
+x <- list(foo = 1:4, bar = 0.6, baz = "hello")
+x[c(1,3)]
+
+name <- "foo"
+x[[name]]#coputed index for 'foo'
+x$name#element 'name' doesn't exist
+x$foo#element 'foo' does exist
+
+x <- list(a = list(10,12,14), b = c(3.14,2.81))
+x[[c(1,3)]]#3rd lement of the 1st element
+x[[1]][[3]]#Same as above
+x[[c(2,1)]]#1st element of the 2nd element
+
+##Practice from Subsetting a Matrix R Lecture
+x <- matrix (1:6, 2, 3)#2 rows 3 columns
+x[1,2]#1st row 2nd column
+x[2,1]#2nd row 1st column
+x[1,]#1st row all elements
+x[,2]#2nd column all rows
+x[1, 2, drop = FALSE]#Preserve the dimension of the object resulting in a 1x1 matrix
+x[1,]
+x[1, , drop = FALSE]
+
+##Practice from Subsetting - Partial Matching R Lecture
+x <- list(aardvark = 1:5)
+x$a #Picking up the first letter of list aaedvark as an 'a'
+x[["a"]]
+x[["a", exact = FALSE]]
+
+##Practice from Subsetting - Removing NA R Lecture
+x <- c(1,2,NA,4,NA,6)
+bad <- is.na(x) #New logical vector named 'bad' identifying NA
+x[!bad] #X without 'bad' or NAs
+y <- c("a", "b", NA, "d", NA, "f")
+good <- complete.cases(x,y)
+x[good]
+y[good]
+
+airquality[1:6,] #First 6 rows all columns of built in airqualty dataset
+good <- complete.cases(airquality) #Logical vector identifying which rows are complete
+airquality[good,][1:6,] #From airquality dataset only the good rows and only the first 6
+
+##Practice from Vectorized Operations R Lecture
+x <- 1:4; y <- 6:9
+x + y
+x > 2 #Logical vector x greater than 2
+x >= 2 #Logical vector x greater than or equal to 2
+y == 8 #Logical vector if y is equal to 8
+x * y
+x / y
+
+x <- matrix (1:4,2,2); y <- matrix(rep(10,4),2,2)
+x * y #Element-wise multiplication
+x / y
+x %*% y #True matrix multiplication
