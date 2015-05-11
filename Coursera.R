@@ -21,7 +21,8 @@ second <- function(x) {
 #Load/read .R code from a file or connetion 
 #source("Coursera_R.R") #Really for R not RStudio
 
-##Practice from Data Types R Lecture
+###Practice for Coursera R Course Week 1
+##Practice from Data Types R Lecture####
 #Creating vectors with c - concatenation
 
 x <- c(0.5, 0.6) 
@@ -45,7 +46,7 @@ as.complex(z)
 #Lists
 a <- list (1,"a",T, 1+4i)
 
-##Practice from Matrices R Lection
+##Practice from Matrices R Lection####
 
 m <- matrix (nrow = 2, ncol = 3)
 dim(m)
@@ -62,24 +63,24 @@ y <- 10:12
 cbind(x, y)
 rbind(x,y)
 
-##Practice from Factors R Lecture
+##Practice from Factors R Lecture####
 x <- factor (c("yes", "yes", "no", "yes", "no"))
 table(x)
 unclass(x)
 x <- factor (c("yes", "yes", "no", "yes", "no"),
              levels = c("yes", "no"))
 
-##Practice from Missing Values R Lecture
+##Practice from Missing Values R Lecture####
 x <- c(1,2,NA,10,3,NaN)
 is.na(x)
 is.nan(x)
 
-##Pracrtice from Data Frames R Lecture
+##Pracrtice from Data Frames R Lecture####
 x <- data.frame(foo = 1:4, bar = c(T,T,F,F))
 nrow(x)
 ncol(x)
 
-##Pracrtice from Names Atributes R Lecture
+##Pracrtice from Names Atributes R Lecture####
 x <- 1:3
 names(x)
 names(x) <- c("foo", "bar", "norf")
@@ -92,18 +93,17 @@ m <- matrix(1:4, nrow = 2, ncol = 2)
 dimnames(m) <- list(c("a", "b"), c("c", "d"))
 m
 
-##Practice from Reading Tabular Data R Lecture
+##Practice from Reading Tabular Data R Lecture####
 data <- read.table("practice.txt", head = T, sep = ",")
 data1 <- read.csv("practice.txt")
 
-##Practice from Reading Large Tables R Lecture
+##Practice from Reading Large Tables R Lecture####
 ?read.table
 initial <- read.table("practice.txt", nrows = 3, head = T, sep = ",")
 classes <- sapply(initial,class)
 tabALL <- read.table("practice.txt", nrows = 3, head = T, sep = ",", colClasses = classes)
 
-
-##Practice from Textual Data Formats R Lecture
+##Practice from Textual Data Formats R Lecture####
 y <- data.frame(a = 1, b = "a")
 dput(y)
 dput(y, file = "y.R")
@@ -116,7 +116,7 @@ dump(c("x","y"), file = "data.R")
 rm(x,y) #Removed x and y
 source("data.R") 
 
-####Practice from Interfaces to the Outside World R Lecture
+##Practice from Interfaces to the Outside World R Lecture####
 str(file)
 con <- file("practice.txt", "r")
 data <- read.csv(con)
@@ -126,7 +126,7 @@ con <- url("http://www.jhsph.edu", "r")
 x <- readLines(con)
 head(x)
 
-##Practice from Subsetting Basics R Lecture
+##Practice from Subsetting Basics R Lecture####
 x <- c("a", "b", "c", "c", "d", "a")
 x[1]
 x[1:4]
@@ -135,7 +135,7 @@ u <- x > "a"
 u
 x[u]
 
-##Practice from Subsetting Lists R Lecture
+##Practice from Subsetting Lists R Lecture####
 x <- list(foo = 1:4, bar = 0.6)
 x[1]#Return a list
 x[2]
@@ -157,7 +157,7 @@ x[[c(1,3)]]#3rd lement of the 1st element
 x[[1]][[3]]#Same as above
 x[[c(2,1)]]#1st element of the 2nd element
 
-##Practice from Subsetting a Matrix R Lecture
+##Practice from Subsetting a Matrix R Lecture####
 x <- matrix (1:6, 2, 3)#2 rows 3 columns
 x[1,2]#1st row 2nd column
 x[2,1]#2nd row 1st column
@@ -167,13 +167,13 @@ x[1, 2, drop = FALSE]#Preserve the dimension of the object resulting in a 1x1 ma
 x[1,]
 x[1, , drop = FALSE]
 
-##Practice from Subsetting - Partial Matching R Lecture
+##Practice from Subsetting - Partial Matching R Lecture####
 x <- list(aardvark = 1:5)
 x$a #Picking up the first letter of list aaedvark as an 'a'
 x[["a"]]
 x[["a", exact = FALSE]]
 
-##Practice from Subsetting - Removing NA R Lecture
+##Practice from Subsetting - Removing NA R Lecture####
 x <- c(1,2,NA,4,NA,6)
 bad <- is.na(x) #New logical vector named 'bad' identifying NA
 x[!bad] #X without 'bad' or NAs
@@ -186,7 +186,7 @@ airquality[1:6,] #First 6 rows all columns of built in airqualty dataset
 good <- complete.cases(airquality) #Logical vector identifying which rows are complete
 airquality[good,][1:6,] #From airquality dataset only the good rows and only the first 6
 
-##Practice from Vectorized Operations R Lecture
+##Practice from Vectorized Operations R Lecture####
 x <- 1:4; y <- 6:9
 x + y
 x > 2 #Logical vector x greater than 2
@@ -200,7 +200,7 @@ x * y #Element-wise multiplication
 x / y
 x %*% y #True matrix multiplication
 
-#For quiz 1 
+##For quiz 1#### 
 x <- 4
 class(x)
 x <- c(4, "a", TRUE)
@@ -240,3 +240,109 @@ mon6 <- subset(removeNA, removeNA$Month == 6)
 mean(mon6[,4])
 mon5 <- subset(x, x$Month == 5)
 max(mon5[,1], na.rm = TRUE)
+
+###Practice for Coursera R Course Week 2####
+##Practice from Control Structures Lectures
+#Practice with if / else structures####
+if(x > 3) {
+  y <- 10
+} else {
+  y <-0
+}
+#Again
+y <- if(x > 3) {
+  10
+} else {
+  0
+} # Same as above, but may be easier to read
+#Practice with For loops####
+for(i in 1:10) {
+  print(1)
+}
+#Example of equivalent for loops
+x <- c("a","b", "c", "d")
+
+for(i in 1:4) {
+  print(x[i])
+}
+
+for(i in seq_along(x)) {
+  print(x[i])
+}
+
+for(letter in x) {
+  print(letter)
+}
+
+for(i in 1:4) print(x[i]) #If only one expression don't need curly loops
+
+x <- matrix(1:6, 2, 3)
+for(i in seq_len(nrow(x))) {
+  for(j in seq_len(ncol(x))) {
+    print(x[i, j])
+  }
+} #Carful with nesting beyond 2-3 levels as it gets difficult to understand/read
+#Practice with While Loops####
+count <- 0
+while(count < 10) {
+  print(count)
+  Count <- count + 1
+} #Carful with while loops as they are infinite until condition
+
+z <- 5
+while(z >= 3 && z <= 10) {
+  print(z)
+  coin <- rbinom(1, 1, 0.5) #Random generate a binomial (1 or 0) with length 1 and probablity of 0.5
+  if(coin == 1) {##Random walk
+    z <- z + 1
+  } else {
+    z <- z - 1
+  }
+}
+#Practice with Repeat, Next, Break####
+x0 <- 1
+tol <- 1e-8
+repeat {
+  x1 <- computeEstimate() #Not a real function, just an example
+  if(abs(x1 - x0) < tol) {
+    break
+  } else {
+    x0 <- x1
+  }
+} #Dangerous because there's no guarantee it will stop, might be better to use for loop with hard limit
+
+for(i in 1:100) {
+  if(i <= 20) { #Skip the first 20 iterations
+  next  
+  }
+  #Do something here
+}
+##Practice from First R Function Lecture####
+add2 <- function(x, y) {
+  x + y
+}
+
+above10 <- function(x) {
+  use <- x > 10
+  x[use]
+}
+
+above <- function(x, n = 10) { #specify default to 10 unless given otherwise
+  use <- x > n
+  x[use]
+}
+x <- 1:20
+above(x)
+above(x, 12) #Specify explicitly numbers above 12
+
+#Example of function with for loop
+columnmean <- function(y, removeNA = TRUE) {#default will be to remove NAs
+  nc <- ncol(y)
+  means <- numeric(nc)
+  for(i in 1:nc) {
+    means[i] <- mean(y[,i], na.rm = removeNA)
+  }
+  means
+}
+columnmean(airquality)
+columnmean(airquality, FALSE)
