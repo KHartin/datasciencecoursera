@@ -242,7 +242,7 @@ mon5 <- subset(x, x$Month == 5)
 max(mon5[,1], na.rm = TRUE)
 
 ###Practice for Coursera R Course Week 2####
-##Practice from Control Structures Lectures
+##Practice from Control Structures R Lectures
 #Practice with if / else structures####
 if(x > 3) {
   y <- 10
@@ -317,7 +317,8 @@ for(i in 1:100) {
   }
   #Do something here
 }
-##Practice from First R Function Lecture####
+
+##Practice from First R Function R Lecture####
 add2 <- function(x, y) {
   x + y
 }
@@ -346,3 +347,138 @@ columnmean <- function(y, removeNA = TRUE) {#default will be to remove NAs
 }
 columnmean(airquality)
 columnmean(airquality, FALSE)
+
+##Practice with Functions R Lecture####
+# Lecture Part 1####
+mydata <- rnorm(100)
+sd(mydata)
+sd(x = mydata)
+sd(x = mydata, na.rm = FALSE)
+sd(na.rm = FALSE, x = mydata) #Order of arguments doesn't matter if arguements are named 
+sd(na.rm = FALSE, mydata) #Can lead to errors or confusion
+args(lm)
+lm(data = mydata, y ~ x, model = FALSE, 1:100) #Doesn't work
+lm(y ~ x, mydata, 1:100, model = FALSE) #NEither does this
+#Lecture Part 2####
+f <- function(a, b = 1, c = 2, d = NULL){
+  
+}
+f <- function(a,b) {
+  a^2
+} #Can function without second arguement because it is not in the function
+
+f <- function(a,b) {
+  print(a)
+  print(b)
+} #Cannot function without second arguement since it is in the function
+
+myplot <- function(x, y, type = "l", ...) { #Maybe want to tweak the default plot function to tweak some charcteristics
+  plot(x, y, type = type, ...)
+}
+
+args(paste) #Paste has the `...` as the first arguements
+args(cat) #Same here, so all following arguements must be explicitly matched, no partial matching
+paste("a", "b", sep = ":")
+paste("a", "b", se = ";")
+
+##Practice from Derek Franks tutorial####
+setwd("C:/Users/KGH/OneDrive/Coursera/R/Assignments")
+dataset_url <- "http://s3.amazonaws.com/practice_assignment/diet_data.zip"
+download.file(dataset_url, "diet_data.zip")
+unzip("diet_data.zip", exdir = "diet_data")
+
+#List Files
+list.files("diet_data")
+#Open one and see what it is
+andy <- read.csv("diet_data/Andy.csv")
+head(andy)
+length(andy$Day) #Number of rows
+dim(andy) #Dimensions 30 rows 4 columns
+#Other ways to inspect a new file
+str(andy)
+summary(andy)
+names(andy)
+#First row of weight column
+andy[1, "Weight"]
+#Final row of weight column
+andy[30, "Weight"]
+#Could create a subset of the weight column for day 30
+andy[which(andy$Day == 30), "Weight"]
+andy[which(andy[,"Day"] == 30), "Weight"]
+subset(andy$Weight, andy$Day==30)
+#Assign Andy's starting and ending weight to vectors:
+andy_start <- andy[1, "Weight"]
+andy_end <- andy[30, "Weight"]
+#How much weight he lost by subtracting the vectors:
+andy_loss <- andy_start - andy_end
+andy_loss
+#Take the output of  list.files()  and store it:
+files <- list.files("diet_data")
+files
+#'files' is now a list of the contents of 'diet_data' in alphabetical order, we can call a specific file by subsetting it:
+files[1]
+files[2]
+files[3:5]
+#Take a quick look at John.csv:
+head(read.csv(files[3])) #Didn't work
+files_full <- list.files("diet_data", full.names=TRUE)
+files_full
+head(read.csv(files_full[3])) #This works since we used the full.names
+#Bind by Andy data  to David data by rows
+andy_david <- rbind(andy, read.csv(files_full[2]))
+head(andy_david)
+tail(andy_david)
+#subset of the data frame that shows us just the 25th day for Andy and David
+day_25 <- andy_david[which(andy_david$Day == 25), ]
+day_25
+#Make a loop 
+for (i in 1:5) {
+  dat <- rbind(dat, read.csv(files_full[i]))
+}
+#Make an empty dataframe firast
+dat <- data.frame()
+for (i in 1:5) {
+  dat <- rbind(dat, read.csv(files_full[i]))
+}
+str(dat)
+#If we put the dat <- data.fram assignment in the looop
+for (i in 1:5) {
+  dat2 <- data.frame()
+  dat2 <- rbind(dat2, read.csv(files_full[i]))
+}
+str(dat2)
+head(dat2)
+#Sumarize values
+median(dat$Weight) #Doesn't work because of NAs
+median(dat$Weight, na.rm=TRUE)
+#Function for doing this will start out something like
+weightmedian <- function(directory, day) { # content of the function }
+#More explicitly
+  weightmedian <- function(directory, day)  {
+    files_list <- list.files(directory, full.names=TRUE)   #creates a list of files
+    dat <- data.frame()                             #creates an empty data frame
+    for (i in 1:5) {                                
+      #loops through the files, rbinding them together 
+      dat <- rbind(dat, read.csv(files_list[i]))
+    }
+    dat_subset <- dat[which(dat[, "Day"] == day),]  #subsets the rows that match the 'day' argument
+    median(dat_subset[, "Weight"], na.rm=TRUE)      #identifies the median weight 
+    #while stripping out the NAs
+  }
+#Test
+weightmedian(directory = "diet_data", day = 20)
+weightmedian("diet_data", 4)
+weightmedian("diet_data", 17)
+#More streamlined approach
+summary(files_full)
+tmp <- vector(mode = "list", length = length(files_full))
+summary(tmp)
+for (i in seq_along(files_full)) {
+  tmp[[i]] <- read.csv(files_full[[i]])
+}
+str(tmp)
+str(lapply(files_full, read.csv)) #Even more compact
+str(tmp[[1]]) #Can manipulate in this form
+head(tmp[[1]][,"Day"])
+output <- do.call(rbind, tmp) #Better to combine into a single dataframe
+str(output)
