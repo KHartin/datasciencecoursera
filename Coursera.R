@@ -3,8 +3,8 @@ setwd("C:/Users/KGH/OneDrive/Coursera/R")
 
 #Write a simple function
 myfunction <- function(){
-  x <- rnorm(100)
-  mean(x)
+    x <- rnorm(100)
+    mean(x)
 }
 
 #Print contents of working directory
@@ -15,7 +15,7 @@ ls()
 
 #Write another simple function
 second <- function(x) {
-  x + rnorm(length(x))
+    x + rnorm(length(x))
 }
 
 #Load/read .R code from a file or connetion 
@@ -231,7 +231,7 @@ x[good,c(1,4)][x$"Ozone" > 31,][x$"Temp" > 90,]
 
 removeNA <- subset(x, !is.na(x$"Ozone" & x$"Temp"))
 highOzTem <- subset(removeNA, removeNA$"Ozone" > 31 & 
-                      removeNA$"Temp" > 90)
+                        removeNA$"Temp" > 90)
 highOzTem[1:10,]
 mean(highOzTem[,2])
 
@@ -245,92 +245,92 @@ max(mon5[,1], na.rm = TRUE)
 ##Practice from Control Structures R Lectures
 #Practice with if / else structures####
 if(x > 3) {
-  y <- 10
+    y <- 10
 } else {
-  y <-0
+    y <-0
 }
 #Again
 y <- if(x > 3) {
-  10
+    10
 } else {
-  0
+    0
 } # Same as above, but may be easier to read
 #Practice with For loops####
 for(i in 1:10) {
-  print(1)
+    print(1)
 }
 #Example of equivalent for loops
 x <- c("a","b", "c", "d")
 
 for(i in 1:4) {
-  print(x[i])
+    print(x[i])
 }
 
 for(i in seq_along(x)) {
-  print(x[i])
+    print(x[i])
 }
 
 for(letter in x) {
-  print(letter)
+    print(letter)
 }
 
 for(i in 1:4) print(x[i]) #If only one expression don't need curly loops
 
 x <- matrix(1:6, 2, 3)
 for(i in seq_len(nrow(x))) {
-  for(j in seq_len(ncol(x))) {
-    print(x[i, j])
-  }
+    for(j in seq_len(ncol(x))) {
+        print(x[i, j])
+    }
 } #Carful with nesting beyond 2-3 levels as it gets difficult to understand/read
 #Practice with While Loops####
 count <- 0
 while(count < 10) {
-  print(count)
-  Count <- count + 1
+    print(count)
+    Count <- count + 1
 } #Carful with while loops as they are infinite until condition
 
 z <- 5
 while(z >= 3 && z <= 10) {
-  print(z)
-  coin <- rbinom(1, 1, 0.5) #Random generate a binomial (1 or 0) with length 1 and probablity of 0.5
-  if(coin == 1) {##Random walk
-    z <- z + 1
-  } else {
-    z <- z - 1
-  }
+    print(z)
+    coin <- rbinom(1, 1, 0.5) #Random generate a binomial (1 or 0) with length 1 and probablity of 0.5
+    if(coin == 1) {##Random walk
+        z <- z + 1
+    } else {
+        z <- z - 1
+    }
 }
 #Practice with Repeat, Next, Break####
 x0 <- 1
 tol <- 1e-8
 repeat {
-  x1 <- computeEstimate() #Not a real function, just an example
-  if(abs(x1 - x0) < tol) {
-    break
-  } else {
-    x0 <- x1
-  }
+    x1 <- computeEstimate() #Not a real function, just an example
+    if(abs(x1 - x0) < tol) {
+        break
+    } else {
+        x0 <- x1
+    }
 } #Dangerous because there's no guarantee it will stop, might be better to use for loop with hard limit
 
 for(i in 1:100) {
-  if(i <= 20) { #Skip the first 20 iterations
-  next  
-  }
-  #Do something here
+    if(i <= 20) { #Skip the first 20 iterations
+        next  
+    }
+    #Do something here
 }
 
 ##Practice from First R Function R Lecture####
 add2 <- function(x, y) {
-  x + y
+    x + y
 }
 
 above10 <- function(x) {
-  use <- x > 10
-  x[use]
+    use <- x > 10
+    x[use]
 }
 
 above <- function(x, n = 10) { #specify default to 10 unless given otherwise
-  use <- x > n
-  x[use]
+    use <- x > n
+    x[use]
 }
 x <- 1:20
 above(x)
@@ -338,12 +338,12 @@ above(x, 12) #Specify explicitly numbers above 12
 
 #Example of function with for loop
 columnmean <- function(y, removeNA = TRUE) {#default will be to remove NAs
-  nc <- ncol(y)
-  means <- numeric(nc)
-  for(i in 1:nc) {
-    means[i] <- mean(y[,i], na.rm = removeNA)
-  }
-  means
+    nc <- ncol(y)
+    means <- numeric(nc)
+    for(i in 1:nc) {
+        means[i] <- mean(y[,i], na.rm = removeNA)
+    }
+    means
 }
 columnmean(airquality)
 columnmean(airquality, FALSE)
@@ -361,25 +361,104 @@ lm(data = mydata, y ~ x, model = FALSE, 1:100) #Doesn't work
 lm(y ~ x, mydata, 1:100, model = FALSE) #NEither does this
 #Lecture Part 2####
 f <- function(a, b = 1, c = 2, d = NULL){
-  
+    
 }
 f <- function(a,b) {
-  a^2
+    a^2
 } #Can function without second arguement because it is not in the function
 
 f <- function(a,b) {
-  print(a)
-  print(b)
+    print(a)
+    print(b)
 } #Cannot function without second arguement since it is in the function
 
 myplot <- function(x, y, type = "l", ...) { #Maybe want to tweak the default plot function to tweak some charcteristics
-  plot(x, y, type = type, ...)
+    plot(x, y, type = type, ...)
 }
 
 args(paste) #Paste has the `...` as the first arguements
 args(cat) #Same here, so all following arguements must be explicitly matched, no partial matching
 paste("a", "b", sep = ":")
 paste("a", "b", se = ";")
+
+##Practice with Scoping Rules R Lecture####
+#Examples of lexical scoping
+search() #Shows Packages Currently Installed, global env is local R env
+f <- function(x, y) {
+    x^2 + y /z #Free variable z not define, R searches in the environement in whch the functin was created
+}
+make.power <- function(n) {
+    pow <- function(x) {
+        x^n
+    }
+    pow
+}
+cube <- make.power(3) #Assign a new function based on previous function
+square <- make.power(2) #Same
+ls(environment(cube)) #Shows there is a variable `n` inside cube
+get("n", environment(cube)) #Shows that `n` has a value of three inside `cube`
+#Comparison to Dynamic Scoping
+y <- 10
+f <- function(x) {
+    y <- 2 #Free - not define in function
+    y^2 + g(x) #Same
+}
+g <- function(x) {
+    x*y
+}
+
+##Practice with Optimization R Lecture####
+make.NegLogLik <- function(data, fixed = c(FALSE, FALSE)) {
+    params <- fixed
+    function(p) {
+        params[!fixed] <- p
+        mu <- params[1]
+        sigma <- params [2]
+        a <- -0.5*length(data)*log(2*pi*sigma^2)
+        b <- -0.5*sum((data-mu)^2) / (sigma^2)
+        -(a + b)
+    }
+}
+set.seed(1); normals <- rnorm(100, 1, 2)
+nLL <- make.NegLogLik(normals)
+nLL
+ls(environment(nLL))
+optim(c(mu = 0, sigma = 1), nLL)$par
+nLL <- make.NegLogLik(normals, c(FALSE,2))
+optimize(nLL, c(-1, 3))$minimum #Lots more options and examples, not rerally sure what the point is..
+
+##Practice with Code STandards R Lecture####
+#Recommend use text editor (RStudio text editor), indent at least 4 - 8 spaces, limit to 87 charcter width,
+#simple/logical functions that break code into digestible portions
+
+##Practice with Dates abd Times R Lecture####
+#Special class Date and POSIXct or the POSIXlt
+#Stored as the number of days or seconds since a 1970-01-01
+x <- as.Date("1970-01-01")
+unclass(x)
+#generic functions for date/time
+weekdays()
+months()
+quarters()
+x <- Sys.time()
+p <- as.POSIXlt(x)
+names(unclass(p))
+p$sec
+unclass(x)
+x$sec
+datestring <- c("January 10, 2012 10:40", "December 9, 2011 9:10")
+x <- strptime(datestring, "%B %d, %Y %H:%M")
+class(x)
+x <- as.Date("2012-01-01")
+y <- strptime("9 Jan 2011 11:34:21", "%d %b %Y %H:%M:%S")
+x - y
+x <- as.POSIXlt(x)
+x <- as.Date("2012-03-01") 
+y <- as.Date("2012-02-28")
+x - y
+x <- as.POSIXct("2012-10-25 01:00:00")
+y <- as.POSIXct("2012-10-25 06:00:00", tz = "GMT")
+y - x
 
 ##Practice from Derek Franks tutorial####
 setwd("C:/Users/KGH/OneDrive/Coursera/R/Assignments")
@@ -433,18 +512,18 @@ day_25 <- andy_david[which(andy_david$Day == 25), ]
 day_25
 #Make a loop 
 for (i in 1:5) {
-  dat <- rbind(dat, read.csv(files_full[i]))
+    dat <- rbind(dat, read.csv(files_full[i]))
 }
 #Make an empty dataframe firast
 dat <- data.frame()
 for (i in 1:5) {
-  dat <- rbind(dat, read.csv(files_full[i]))
+    dat <- rbind(dat, read.csv(files_full[i]))
 }
 str(dat)
 #If we put the dat <- data.fram assignment in the looop
 for (i in 1:5) {
-  dat2 <- data.frame()
-  dat2 <- rbind(dat2, read.csv(files_full[i]))
+    dat2 <- data.frame()
+    dat2 <- rbind(dat2, read.csv(files_full[i]))
 }
 str(dat2)
 head(dat2)
@@ -453,32 +532,33 @@ median(dat$Weight) #Doesn't work because of NAs
 median(dat$Weight, na.rm=TRUE)
 #Function for doing this will start out something like
 weightmedian <- function(directory, day) { # content of the function }
-#More explicitly
-  weightmedian <- function(directory, day)  {
-    files_list <- list.files(directory, full.names=TRUE)   #creates a list of files
-    dat <- data.frame()                             #creates an empty data frame
-    for (i in 1:5) {                                
-      #loops through the files, rbinding them together 
-      dat <- rbind(dat, read.csv(files_list[i]))
+    #More explicitly
+    weightmedian <- function(directory, day)  {
+        files_list <- list.files(directory, full.names=TRUE)   #creates a list of files
+        dat <- data.frame()                             #creates an empty data frame
+        for (i in 1:5) {                                
+            #loops through the files, rbinding them together 
+            dat <- rbind(dat, read.csv(files_list[i]))
+        }
+        dat_subset <- dat[which(dat[, "Day"] == day),]  #subsets the rows that match the 'day' argument
+        median(dat_subset[, "Weight"], na.rm=TRUE)      #identifies the median weight 
+        #while stripping out the NAs
     }
-    dat_subset <- dat[which(dat[, "Day"] == day),]  #subsets the rows that match the 'day' argument
-    median(dat_subset[, "Weight"], na.rm=TRUE)      #identifies the median weight 
-    #while stripping out the NAs
-  }
-#Test
-weightmedian(directory = "diet_data", day = 20)
-weightmedian("diet_data", 4)
-weightmedian("diet_data", 17)
-#More streamlined approach
-summary(files_full)
-tmp <- vector(mode = "list", length = length(files_full))
-summary(tmp)
-for (i in seq_along(files_full)) {
-  tmp[[i]] <- read.csv(files_full[[i]])
-}
-str(tmp)
-str(lapply(files_full, read.csv)) #Even more compact
-str(tmp[[1]]) #Can manipulate in this form
-head(tmp[[1]][,"Day"])
-output <- do.call(rbind, tmp) #Better to combine into a single dataframe
-str(output)
+    #Test
+    weightmedian(directory = "diet_data", day = 20)
+    weightmedian("diet_data", 4)
+    weightmedian("diet_data", 17)
+    #More streamlined approach
+    summary(files_full)
+    tmp <- vector(mode = "list", length = length(files_full))
+    summary(tmp)
+    for (i in seq_along(files_full)) {
+        tmp[[i]] <- read.csv(files_full[[i]])
+    }
+    str(tmp)
+    str(lapply(files_full, read.csv)) #Even more compact
+    str(tmp[[1]]) #Can manipulate in this form
+    head(tmp[[1]][,"Day"])
+    output <- do.call(rbind, tmp) #Better to combine into a single dataframe
+    str(output)
+    
