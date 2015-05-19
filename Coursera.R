@@ -561,4 +561,19 @@ weightmedian <- function(directory, day) { # content of the function }
     head(tmp[[1]][,"Day"])
     output <- do.call(rbind, tmp) #Better to combine into a single dataframe
     str(output)
-    
+
+###Practice for Coursera R Course Week 3####
+##Practice with lapply R Lecture####
+#lapply - loop over a list and apply a function to each element
+x <- list(a = 1:5, b = rnorm(10))
+lapply(x, mean) #What results is always a list
+x <- list(a = 1:4, b = rnorm(10), c = rnorm(20,1),
+          d = rnorm(100,5))
+lapply(x, mean)
+x <- 1:4
+lapply(x, runif) #Runif creates vectors of random uniform variables between 0 - 1
+lapply(x, runif, min =0, max = 10) #Use runif with larger range of unifrom variables
+x <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2))
+lapply(x, function(elt) elt[,1]) #Create an anonymous function with argument elt that extracts just the first column
+#sapply is like lapply but will simplify outputs such as lists to vector
+sapply(x, mean)
